@@ -1,0 +1,62 @@
+
+<body>
+    <h1>
+      {{title}}
+    </h1>
+    <h2>
+      {{subtitle}}
+    </h2>
+
+
+    <p>
+        {{description}}
+    </p>
+    <div>
+      <div>
+        <p>
+          You can find some more
+          <a target="_blank" href="http://lifehacker.com/5924093/five-best-to-do-list-managers">todo list managers</a>
+        </p>
+      </div>
+    </div>
+
+
+    <div class="todos">
+      <div>
+          <form (submit)="addTodo($event)">
+            <p>
+              <button class="button" type="submit" [disabled]="newTodo===''">Add New Assignment </button>
+            </p>
+            <input type="text" [(ngModel)]="newTodo"  class="textfield" name="newTodo">
+          </form>
+       </div>
+
+      <div class="general" [hidden]="newTodo">
+        <b>Type in a new todo...</b>
+      </div>
+
+      <div class="general" style="color: blue" [hidden]="!newTodo" align="center">
+     <!--  Another two-way binding example-->
+          <b >{{ newTodo }}</b>
+      </div>
+      <div class="lll" [hidden]="isEmpty">
+        <ul>
+          <li *ngFor="let todo of todos; let i=index">
+            <input type="checkbox" class="checkbox" [(ngModel)]="todo.completed" />
+            <span [ngClass]="{'checked': todo.complited}" >{{ todo.newTodo }}</span>
+            <span class="fa fa-trash" id={{i}} (mouseout)='iconRemoveAssignment(i)' (mouseover)='removeAssignmentMessage(i)' (click)="deleteTodo(i)">[X]</span>
+          </li>
+        </ul>
+      </div>
+      <second-cmp>
+        <!--<i class="glyphicon glyphicon-trash"></i>-->
+      </second-cmp>
+      <div class="general">
+        <button class="button"  (click)="deleteSelectedTodos()">Delete Selected</button>
+      </div>
+
+      <p>Click the button to trigger a function that will output "Hello World" in a p element with id="demo".</p>
+      <button class="button" (click)="newWindow(mako)">Mako News</button>
+      <button class="button" (click)="newWindow(walla)">Walla News</button>
+    </div>
+</body>
